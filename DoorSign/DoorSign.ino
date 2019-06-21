@@ -20,7 +20,9 @@ const char* ssid = "FRITZBoxKarin";
 const char* password = "2871247716916185";
 
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
+NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 3600, 60000);
+
+bool dpTime = false;
 
 //---------------------------------------------------------------
 //Our HTML webpage contents in program memory
@@ -58,6 +60,7 @@ void handleOpen() {
  lcd.clear();
  lcd.print("     OPEN!!     ");
  digitalWrite(D4, LOW);
+ dpTime = true;
 }
 
 void handleClosed() {
@@ -67,6 +70,7 @@ void handleClosed() {
  lcd.clear();
  lcd.print("    CLOSED!!    ");
  digitalWrite(D4, LOW);
+ dpTime = true;
 }
 
 void setup() {
@@ -135,7 +139,7 @@ void setup() {
     digitalWrite(D4, HIGH);
     Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
     lcd.setCursor(0,1);
-    lcd.printf("Progress: %u%%\r", (progress / (total / 100)))d;
+    lcd.printf("Progress: %u%%\r", (progress / (total / 100)));
     delay(50);
     digitalWrite(D4, LOW);
   });
@@ -211,6 +215,13 @@ void loop() {
   server.handleClient();
   ArduinoOTA.handle();
   timeClient.update();
+  if (dpTime) {
+  lcd.setCursor(0,1);
+  lcd.print("   ");
+  lcd.print(timeClient.getFormattedTime());
+  lcd.print("UTC");
+  lcd.setCursor(0,0);
+  }
   while (WiFi.status() != WL_CONNECTED) {
     digitalWrite(D4, HIGH);
     delay(250);
