@@ -1,0 +1,37 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=DoorSign
+*Date=13:34:37
+*CreatedBy=Fritzing 0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;82.4089;-54.1866;0;Bottom;Hole1
+2;;THT;64.6289;-44.0266;90;Bottom;R1
+3;;;48.4632;-39.0708;0;Bottom;Via11
+4;;;37.4904;-29.9268;0;Bottom;Via2
+5;;;41.7689;-54.1866;0;Bottom;Hole2
+6;;;36.2712;-26.8788;0;Bottom;Via10
+7;;;60.0456;-36.0228;0;Bottom;Via4
+8;;;3.66889;-54.1866;0;Bottom;Hole3
+9;;;5.7912;-37.242;0;Bottom;Via6
+10;;;43.5864;-46.9956;0;Bottom;Via5
+11;;;40.7529;-18.4107;0;Bottom;LCD1
+12;;;31.6089;-47.8366;-90;Bottom;LVL2
+13;;;63.3589;-38.6194;180;Bottom;WeMos D1 Mini1
+14;;;21.6408;-22.6116;0;Bottom;Via3
+15;;;40.5384;-47.6052;0;Bottom;Via12
+16;;;55.7784;-26.2692;0;Bottom;Via1
+17;;5 mm [THT];79.8689;-42.1379;0;Bottom;LED1
+18;;;5.1816;-43.338;0;Bottom;Via9
+19;;TO92 [THT];46.76;-44.2171;90;Bottom;Q1
+20;;;32.6136;-29.9268;0;Bottom;Via7
+21;;;13.8289;-47.8366;90;Bottom;LVL1
+22;;;33.8328;-50.6532;0;Bottom;Via8
