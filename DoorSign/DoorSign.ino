@@ -82,36 +82,37 @@ Please enter UTC time in the "xx:xx" format.<br><br>
 <input type="text" id="open1" name="open1" value="xx:xx"><br>
 <label for="close1">Closing Time(Monday)</label><br>
 <input type="text" id="close1" name="close1" value="xx:xx"><br><br>
-<input type="submit" value="Submit">
+
 <label for="open2">Opening Time (Tuesday)</label><br>
 <input type="text" id="open2" name="open2" value="xx:xx"><br>
 <label for="close2">Closing Time(Tuesday)</label><br>
 <input type="text" id="close2" name="close2" value="xx:xx"><br><br>
-<input type="submit" value="Submit">
+
 <label for="open3">Opening Time (Wendsday)</label><br>
 <input type="text" id="open3" name="open3" value="xx:xx"><br>
 <label for="close3">Closing Time(Wendsday)</label><br>
 <input type="text" id="close3" name="close3" value="xx:xx"><br><br>
-<input type="submit" value="Submit">
+
 <label for="open4">Opening Time (Thursday)</label><br>
 <input type="text" id="open4" name="open4" value="xx:xx"><br>
 <label for="close4">Closing Time(Thursday)</label><br>
 <input type="text" id="close4" name="close4" value="xx:xx"><br><br>
-<input type="submit" value="Submit">
+
 <label for="open5">Opening Time (Friday)</label><br>
 <input type="text" id="open5" name="open5" value="xx:xx"><br>
 <label for="close5">Closing Time(Friday)</label><br>
 <input type="text" id="close5" name="close5" value="xx:xx"><br><br>
-<input type="submit" value="Submit">
+
 <label for="open6">Opening Time (Saturtay)</label><br>
 <input type="text" id="open6" name="open6" value="xx:xx"><br>
 <label for="close6">Closing Time(Saturday)</label><br>
 <input type="text" id="close6" name="close6" value="xx:xx"><br><br>
-<input type="submit" value="Submit">
+
 <label for="open7">Opening Time (Sunday)</label><br>
 <input type="text" id="open7" name="open7" value="xx:xx"><br>
 <label for="close7">Closing Time(Sunday)</label><br>
 <input type="text" id="close7" name="close7" value="xx:xx"><br><br>
+
 <input type="submit" value="Submit">
 </form>
 </center>
@@ -144,43 +145,43 @@ void handleOpen() {
   cm = cm1;
   om = om1;
   oh = oh1;
-  return;
+  break;
   case 2:
   ch = ch2;
   cm = cm2;
   om = om2;
   oh = oh2;
-  return;
+  break;
   case 3:
   ch = ch3;
   cm = cm3;
   om = om3;
   oh = oh3;
-  return;
+  break;
   case 4:
   ch = ch4;
   cm = cm4;
   om = om4;
   oh = oh4;
-  return;
+  break;
   case 5:
   ch = ch5;
   cm = cm5;
   om = om5;
   oh = oh5;
-  return;
+  break;
   case 6:
   ch = ch6;
   cm = cm6;
   om = om6;
   oh = oh6;
-  return;
+  break;
   case 0:
   ch = ch7;
   cm = cm7;
   om = om7;
   oh = oh7;
-  return;
+  break;
   
  }
  lcd.setCursor(0,1);
@@ -213,43 +214,43 @@ void handleClosed() {
   cm = cm1;
   om = om1;
   oh = oh1;
-  return;
+  break;
   case 2:
   ch = ch2;
   cm = cm2;
   om = om2;
   oh = oh2;
-  return;
+  break;
   case 3:
   ch = ch3;
   cm = cm3;
   om = om3;
   oh = oh3;
-  return;
+  break;
   case 4:
   ch = ch4;
   cm = cm4;
   om = om4;
   oh = oh4;
-  return;
+  break;
   case 5:
   ch = ch5;
   cm = cm5;
   om = om5;
   oh = oh5;
-  return;
+  break;
   case 6:
   ch = ch6;
   cm = cm6;
   om = om6;
   oh = oh6;
-  return;
+  break;
   case 0:
   ch = ch7;
   cm = cm7;
   om = om7;
   oh = oh7;
-  return;
+  break;
   
  }
  
