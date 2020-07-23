@@ -158,9 +158,9 @@ void handleTimeCtrl() {
   msg += cm;
   msg += "\n";
   
-  handleOpen();
   server.send(200, "text/plain", msg); //Send web page
   Serial.println(msg);
+  handleOpen();
   digitalWrite(D4, LOW);
 }
 
