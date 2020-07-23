@@ -77,7 +77,7 @@ const char MAIN_page[] PROGMEM = R"=====(
 </form>
 <hr>
 <h3>Time Control</h3>
-Please enter UTC time in the "xx:xx" format.<br><br>
+Please enter <b>UTC time</b> in the "xx:xx" format.<br><br>
 <form method="get" action="timectrl">
 
 
@@ -196,16 +196,16 @@ void handleOpen() {
  
  lcd.setCursor(0,1);
  lcd.print("   ");
- if (oh<10) lcd.print("0");
+ if (oh<10) {lcd.print("0");};
  lcd.print(oh);
  lcd.print(":");
- if (om<10) lcd.print("0");
+ if (om<10) {lcd.print("0");};
  lcd.print(om);
  lcd.print(" to ");
- if (ch<10) lcd.print("0");
+ if (ch<10) {lcd.print("0");};
  lcd.print(ch);
  lcd.print(":");
- if (cm<10) lcd.print("0");
+ if (cm<10) {lcd.print("0");};
  lcd.print(cm);
  EEPROM.write(address, 1);
  EEPROM.commit();
@@ -273,16 +273,16 @@ void handleClosed() {
  
  lcd.setCursor(0,1);
  lcd.print("   ");
- if (oh<10) lcd.print("0");
+ if (ch<10) {lcd.print("0");};
  lcd.print(ch);
  lcd.print(":");
- if (cm<10) lcd.print("0");
+ if (cm<10) {lcd.print("0");};
  lcd.print(cm);
  lcd.print(" to ");
- if (oh<10) lcd.print("0");
+ if (oh<10) {lcd.print("0");};
  lcd.print(oh);
  lcd.print(":");
- if (om<10) lcd.print("0");
+ if (om<10) {lcd.print("0");};
  lcd.print(om);
  EEPROM.write(address, 0);
  EEPROM.commit();
