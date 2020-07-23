@@ -123,7 +123,7 @@ void handleTimeCtrl() {
   digitalWrite(D4, HIGH);
   
   String opentime = server.arg("open");
-  String closetime = server.arg("close");
+  String closetime = server.arg("closed");
 
   if (!opentime.indexOf(":")) {
     server.send(200, "text/plain", "Formatting Error!"); //Send web page
