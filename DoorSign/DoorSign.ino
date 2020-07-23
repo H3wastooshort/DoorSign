@@ -84,6 +84,15 @@ void handleOpen() {
  server.send(200, "text/plain", "OK! Status: Open"); //Send web page
  lcd.clear();
  lcd.print("       OPEN!!       ");
+ lcd.setCursor(0,1);
+ lcd.print(oh);
+ lcd.print(":");
+ lcd.print(om);
+ lcd.print("UTC to ");
+ lcd.print(ch);
+ lcd.print(":");
+ lcd.print(cm);
+ lcd.print("UTC");
  EEPROM.write(address, 1);
  EEPROM.commit();
  digitalWrite(D4, LOW);
@@ -95,6 +104,15 @@ void handleClosed() {
  server.send(200, "text/plain", "OK! Status: Closed"); //Send web page
  lcd.clear();
  lcd.print("      CLOSED!!      ");
+ lcd.setCursor(0,1);
+ lcd.print(oh);
+ lcd.print(":");
+ lcd.print(om);
+ lcd.print("UTC to ");
+ lcd.print(ch);
+ lcd.print(":");
+ lcd.print(cm);
+ lcd.print("UTC");
  EEPROM.write(address, 0);
  EEPROM.commit();
  digitalWrite(D4, LOW);
@@ -303,42 +321,12 @@ void checkTime() {
   timeClient.update();
   if (timeClient.getHours() == oh and timeClient.getMinutes() == om and timeClient.getSeconds() < 10) {
     Serial.println("Opened by Timer");
-    lcd.clear();
-    lcd.print("       OPEN!!       ");
-    lcd.setCursor(0,1);
-    //lcd.print("    ");
-    //lcd.print(timeClient.getFormattedTime());
-    //lcd.print(" UTC");
-    lcd.print(oh);
-    lcd.print(":");
-    lcd.print(om);
-    lcd.print("UTC to ");
-    lcd.print(ch);
-    lcd.print(":");
-    lcd.print(cm);
-    lcd.print("UTC");
-    EEPROM.write(address, 1);
-    EEPROM.commit();
+    handleOpen();
   }
   if(timeClient.getHours() == ch and timeClient.getMinutes() == cm and timeClient.getSeconds() < 10) {
     Serial.println("Closed by Timer");
-    lcd.clear();
-    lcd.print("      CLOSED!!      ");
-    lcd.setCursor(0,1);
-    //lcd.print("    ");
-    //lcd.print(timeClient.getFormattedTime());
-    //lcd.print(" UTC");
-    lcd.print(ch);
-    lcd.print(":");
-    lcd.print(cm);
-    lcd.print("UTC to ");
-    lcd.print(oh);
-    lcd.print(":");
-    lcd.print(om);
-    lcd.print("UTC");
-    EEPROM.write(address, 0);
-    EEPROM.commit();
-  }
+    handleClosed();
+}
 }
 
 void loop() {
