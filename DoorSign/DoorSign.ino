@@ -50,6 +50,7 @@ int om7;
 int oh7;
 int cm7;
 int ch7;
+int tz;
 
 int address = 0;
 
@@ -78,6 +79,11 @@ const char MAIN_page[] PROGMEM = R"=====(
 <h3>Time Control</h3>
 Please enter UTC time in the "xx:xx" format.<br><br>
 <form method="get" action="timectrl">
+
+
+<label for="tz">Timezone:</label><br>
+<input type="text" id="tz" name="tz" value="+1"><br><br>
+
 <label for="open1">Opening Time (Monday)</label><br>
 <input type="text" id="open1" name="open1" value="xx:xx"><br>
 <label for="close1">Closing Time(Monday)</label><br>
@@ -185,6 +191,10 @@ void handleOpen() {
   
  }
 
+ ch = ch + tz;
+ cm = cm + tz;
+ om = om + tz;
+ oh = oh + tz;
  
  lcd.setCursor(0,1);
  lcd.print(ch);
@@ -195,7 +205,7 @@ void handleOpen() {
  else {
   lcd.print(cm);
  }
- lcd.print("UTC to ");
+ lcd.print(" to ");
  lcd.print(oh);
  lcd.print(":");
  if (om == 0) {
@@ -204,7 +214,6 @@ void handleOpen() {
  else {
   lcd.print(om);
  }
- lcd.print("UTC");
  EEPROM.write(address, 1);
  EEPROM.commit();
  digitalWrite(D4, LOW);
@@ -224,47 +233,52 @@ void handleClosed() {
   case 1:
   ch = ch1;
   cm = cm1;
-  om = om1;
-  oh = oh1;
+  om = om2;
+  oh = oh2;
   break;
   case 2:
   ch = ch2;
   cm = cm2;
-  om = om2;
-  oh = oh2;
+  om = om3;
+  oh = oh3;
   break;
   case 3:
   ch = ch3;
   cm = cm3;
-  om = om3;
-  oh = oh3;
+  om = om4;
+  oh = oh4;
   break;
   case 4:
   ch = ch4;
   cm = cm4;
-  om = om4;
-  oh = oh4;
+  om = om5;
+  oh = oh5;
   break;
   case 5:
   ch = ch5;
   cm = cm5;
-  om = om5;
-  oh = oh5;
+  om = om6;
+  oh = oh6;
   break;
   case 6:
   ch = ch6;
   cm = cm6;
-  om = om6;
-  oh = oh6;
+  om = om7;
+  oh = oh7;
   break;
   case 0:
   ch = ch7;
   cm = cm7;
-  om = om7;
-  oh = oh7;
+  om = om1;
+  oh = oh1;
   break;
   
  }
+
+ ch = ch + tz;
+ cm = cm + tz;
+ om = om + tz;
+ oh = oh + tz;
  
  lcd.setCursor(0,1);
  lcd.print(ch);
@@ -275,7 +289,7 @@ void handleClosed() {
  else {
   lcd.print(cm);
  }
- lcd.print("UTC to ");
+ lcd.print(" to ");
  lcd.print(oh);
  lcd.print(":");
  if (om == 0) {
@@ -284,7 +298,6 @@ void handleClosed() {
  else {
   lcd.print(om);
  }
- lcd.print("UTC");
  EEPROM.write(address, 0);
  EEPROM.commit();
  digitalWrite(D4, LOW);
@@ -308,7 +321,9 @@ void handleTimeCtrl() {
   String closetime6 = server.arg("close6");
   String opentime7 = server.arg("open7");
   String closetime7 = server.arg("close7");
+  String timezone = server.arg("tz");
 
+  tz = timezone.toInt();
   oh1 = opentime1.substring(0, opentime1.indexOf(":")).toInt();
   om1 = opentime1.substring(opentime1.indexOf(":") + 1).toInt();
   ch1 = closetime1.substring(0, closetime1.indexOf(":")).toInt();
@@ -373,6 +388,9 @@ void handleTimeCtrl() {
   EEPROM.write(address+26, oh7);
   EEPROM.write(address+27, cm7);
   EEPROM.write(address+28, ch7);
+
+  EEPROM.write(address+29, tz+127);
+  
   EEPROM.commit();
   
   server.send(200, "text/plain", "OK!"); //Send web page
@@ -427,6 +445,8 @@ void setup() {
   oh7 = EEPROM.read(address+26);
   cm7 = EEPROM.read(address+27);
   ch7 = EEPROM.read(address+28);
+
+  tz = EEPROM.read(address+28)-127;
   
   lcd.clear();
   lcd.print("EEPROM... OK");
