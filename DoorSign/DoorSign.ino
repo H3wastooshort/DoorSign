@@ -198,13 +198,17 @@ void handleOpen() {
  
  lcd.setCursor(0,1);
  lcd.print("   ");
+ if (oh<10) lcd.print("0");
  lcd.print(oh);
  lcd.print(":");
- lcd.print(sprintf("%02d", om));
+ if (om<10) lcd.print("0");
+ lcd.print(om);
  lcd.print(" to ");
+ if (ch<10) lcd.print("0");
  lcd.print(ch);
  lcd.print(":");
- lcd.print(sprintf("%02d", cm));
+ if (cm<10) lcd.print("0");
+ lcd.print(cm);
  EEPROM.write(address, 1);
  EEPROM.commit();
  digitalWrite(D4, LOW);
@@ -273,13 +277,17 @@ void handleClosed() {
  
  lcd.setCursor(0,1);
  lcd.print("   ");
+ if (oh<10) lcd.print("0");
  lcd.print(ch);
  lcd.print(":");
- lcd.print(sprintf("%02d", cm));
+ if (cm<10) lcd.print("0");
+ lcd.print(cm);
  lcd.print(" to ");
+ if (oh<10) lcd.print("0");
  lcd.print(oh);
  lcd.print(":");
- lcd.print(sprintf("%02d", om));
+ if (om<10) lcd.print("0");
+ lcd.print(om);
  EEPROM.write(address, 0);
  EEPROM.commit();
  digitalWrite(D4, LOW);
