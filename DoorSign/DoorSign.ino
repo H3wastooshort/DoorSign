@@ -320,12 +320,12 @@ void setup() {
 
 void checkTime() {
   timeClient.update();
-  if (timeClient.getHours() == oh and timeClient.getMinutes() == om and timeClient.getSeconds() < 10) {
+  if (timeClient.getHours() == oh and timeClient.getMinutes() == om) {
     Serial.println("Opened by Timer");
     handleOpen();
     digitalWrite(D0, LOW);
   }
-  if(timeClient.getHours() == ch and timeClient.getMinutes() == cm and timeClient.getSeconds() < 10) {
+  if(timeClient.getHours() == ch and timeClient.getMinutes() == cm) {
     Serial.println("Closed by Timer");
     handleClosed();
     digitalWrite(D0, HIGH);
