@@ -51,7 +51,7 @@ const char MAIN_page[] PROGMEM = R"=====(
 <form method="get" action="open">
 <input type="submit" value="Open">
 </form>
-<form method="get" action="close">
+<form method="get" action="closed">
 <input type="submit" value="Close">
 </form>
 <hr>
@@ -123,7 +123,7 @@ void handleTimeCtrl() {
   digitalWrite(D4, HIGH);
   
   String opentime = server.arg("open");
-  String closetime = server.arg("closed");
+  String closetime = server.arg("close");
 
   if (!opentime.indexOf(":")) {
     server.send(200, "text/plain", "Formatting Error!"); //Send web page
