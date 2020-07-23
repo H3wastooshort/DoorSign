@@ -105,13 +105,13 @@ void handleClosed() {
  lcd.clear();
  lcd.print("      CLOSED!!      ");
  lcd.setCursor(0,1);
- lcd.print(oh);
- lcd.print(":");
- lcd.print(om);
- lcd.print("UTC to ");
  lcd.print(ch);
  lcd.print(":");
  lcd.print(cm);
+ lcd.print("UTC to ");
+ lcd.print(oh);
+ lcd.print(":");
+ lcd.print(om);
  lcd.print("UTC");
  EEPROM.write(address, 0);
  EEPROM.commit();
@@ -158,13 +158,14 @@ void handleTimeCtrl() {
   msg += cm;
   msg += "\n";
   
-  
+  checkTime();
   server.send(200, "text/plain", msg); //Send web page
   Serial.println(msg);
   digitalWrite(D4, LOW);
 }
 
 void setup() {
+  pinMode(D0, OUTPUT);
   pinMode(D4, OUTPUT);
   Serial.begin(115200);
   // put your setup code here, to run once:
@@ -322,10 +323,12 @@ void checkTime() {
   if (timeClient.getHours() == oh and timeClient.getMinutes() == om and timeClient.getSeconds() < 10) {
     Serial.println("Opened by Timer");
     handleOpen();
+    digitalWrite(D0, LOW);
   }
   if(timeClient.getHours() == ch and timeClient.getMinutes() == cm and timeClient.getSeconds() < 10) {
     Serial.println("Closed by Timer");
     handleClosed();
+    digitalWrite(D0, HIGH);
 }
 }
 
