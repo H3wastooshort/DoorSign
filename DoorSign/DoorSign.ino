@@ -192,7 +192,7 @@ void handleOpen() {
  }
 
  ch = ch + tz;
- cm = cm + tz;
+ oh = oh + tz;
  
  lcd.setCursor(0,1);
  lcd.print("   ");
@@ -269,7 +269,7 @@ void handleClosed() {
  }
 
  ch = ch + tz;
- cm = cm + tz;
+ oh = oh + tz;
  
  lcd.setCursor(0,1);
  lcd.print("   ");
