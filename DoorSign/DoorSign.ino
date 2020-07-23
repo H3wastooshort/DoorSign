@@ -184,14 +184,26 @@ void handleOpen() {
   break;
   
  }
+
+ 
  lcd.setCursor(0,1);
- lcd.print(oh);
- lcd.print(":");
- lcd.print(om);
- lcd.print("UTC to ");
  lcd.print(ch);
  lcd.print(":");
- lcd.print(cm);
+ if (cm == 0) {
+  lcd.print("00");
+ }
+ else {
+  lcd.print(cm);
+ }
+ lcd.print("UTC to ");
+ lcd.print(oh);
+ lcd.print(":");
+ if (om == 0) {
+  lcd.print("00");
+ }
+ else {
+  lcd.print(om);
+ }
  lcd.print("UTC");
  EEPROM.write(address, 1);
  EEPROM.commit();
@@ -257,11 +269,21 @@ void handleClosed() {
  lcd.setCursor(0,1);
  lcd.print(ch);
  lcd.print(":");
- lcd.print(cm);
+ if (cm == 0) {
+  lcd.print("00");
+ }
+ else {
+  lcd.print(cm);
+ }
  lcd.print("UTC to ");
  lcd.print(oh);
  lcd.print(":");
- lcd.print(om);
+ if (om == 0) {
+  lcd.print("00");
+ }
+ else {
+  lcd.print(om);
+ }
  lcd.print("UTC");
  EEPROM.write(address, 0);
  EEPROM.commit();
