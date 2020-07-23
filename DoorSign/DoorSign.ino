@@ -56,12 +56,12 @@ const char MAIN_page[] PROGMEM = R"=====(
 </form>
 <hr>
 <h3>Time Control</h3>
-Please enter UTC time in the "xx:xx" format.<br>
+Please enter UTC time in the "xx:xx" format.<br><br>
 <form method="get" action="timectrl">
 <label for="open">Opening Time</label><br>
-<input type="text" id="open" name="open" value="07:00"><br>
+<input type="text" id="open" name="open" value="xx:xx"><br>
 <label for="close">Closing Time</label><br>
-<input type="text" id="close" name="close" value="20:00"><br><br>
+<input type="text" id="close" name="close" value="xx:xx"><br><br>
 <input type="submit" value="Submit">
 </form>
 </center>
@@ -106,6 +106,19 @@ void handleTimeCtrl() {
   
   String opentime = server.arg("open");
   String closetime = server.arg("close");
+
+  if (!opentime.indexOf(":")) {
+    server.send(200, "text/plain", "Formatting Error!"); //Send web page
+    Serial.println("Formatting Error!");
+    return;
+  }
+
+  if (!closetime.indexOf(":")) {
+    server.send(200, "text/plain", "Formatting Error!"); //Send web page
+    Serial.println("Formatting Error!");
+    return;
+  }
+  
   oh = opentime.substring(0, opentime.indexOf(":")).toInt();
   om = opentime.substring(opentime.indexOf(":") + 1).toInt();
   ch = closetime.substring(0, closetime.indexOf(":")).toInt();
@@ -289,18 +302,30 @@ void setup() {
 void checkTime() {
   timeClient.update();
   lcd.setCursor(0,1);
-  lcd.print("    ");
-  lcd.print(timeClient.getFormattedTime());
-  lcd.print(" UTC");
-  if (timeClient.getHours() == oh and timeClient.getMinutes() == om) {
+  //lcd.print("    ");
+  //lcd.print(timeClient.getFormattedTime());
+  //lcd.print(" UTC");
+  lcd.print(oh);
+  lcd.print(":");
+  lcd.print(om);
+  lcd.print("UTC to ");
+  lcd.print(ch);
+  lcd.print(":");
+  lcd.print(cm);
+  lcd.print("UTC");
+  if (timeClient.getHours() == oh and timeClient.getMinutes() == om and timeClient.getSeconds() < 10) {
     Serial.println("Opened by Timer");
     lcd.clear();
     lcd.print("       OPEN!!       ");
+    EEPROM.write(address, 1);
+    EEPROM.commit();
   }
-  if(timeClient.getHours() == ch and timeClient.getMinutes() == cm) {
+  if(timeClient.getHours() == ch and timeClient.getMinutes() == cm and timeClient.getSeconds() < 10) {
     Serial.println("Closed by Timer");
     lcd.clear();
     lcd.print("      CLOSED!!      ");
+    EEPROM.write(address, 0);
+    EEPROM.commit();
   }
 }
 
