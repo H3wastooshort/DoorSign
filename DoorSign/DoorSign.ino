@@ -158,7 +158,7 @@ void handleTimeCtrl() {
   msg += cm;
   msg += "\n";
   
-  checkTime();
+  handleOpen();
   server.send(200, "text/plain", msg); //Send web page
   Serial.println(msg);
   digitalWrite(D4, LOW);
@@ -320,12 +320,12 @@ void setup() {
 
 void checkTime() {
   timeClient.update();
-  if (timeClient.getHours() == oh and timeClient.getMinutes() == om) {
+  if (timeClient.getHours() == oh and timeClient.getMinutes() == om and timeClient.getSeconds() < 10) {
     Serial.println("Opened by Timer");
     handleOpen();
     digitalWrite(D0, LOW);
   }
-  if(timeClient.getHours() == ch and timeClient.getMinutes() == cm) {
+  if(timeClient.getHours() == ch and timeClient.getMinutes() == cm and timeClient.getSeconds() < 10) {
     Serial.println("Closed by Timer");
     handleClosed();
     digitalWrite(D0, HIGH);
@@ -337,6 +337,7 @@ void loop() {
   server.handleClient();
   ArduinoOTA.handle();
   checkTime();
+  Serial.println(timeClient.getFormattedTime());
   lcd.setCursor(0,0);
   while (WiFi.status() != WL_CONNECTED) {
     digitalWrite(D4, HIGH);
