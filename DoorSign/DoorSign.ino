@@ -750,7 +750,8 @@ void loop() {
   if (WiFi.status() != WL_CONNECTED) {
   lcd.setCursor(0,0);
   lcd.createChar(0, WiFiSymbol);
-  lcd.write(0);
+  lcd.write((uint8_t)0);
+  lcd.setCursor(1,0);
   lcd.print("!");
   digitalWrite(D4, HIGH);
   delay(250);
