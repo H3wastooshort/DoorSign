@@ -55,15 +55,15 @@ int tz;
 int address = 0;
 
 
-byte WiFiSymbol[] = {
-  B01110,
-  B10001,
-  B00100,
-  B01010,
-  B00000,
-  B00100,
-  B00000,
-  B11111
+byte WiFiSymbol[8] = {
+  0b00000,
+  0b01110,
+  0b10001,
+  0b00100,
+  0b01010,
+  0b00000,
+  0b00100,
+  0b00000
 };
 
 
@@ -748,8 +748,8 @@ void loop() {
   Serial.println(timeClient.getFormattedTime());
   lcd.setCursor(0,0);
   if (WiFi.status() != WL_CONNECTED) {
-  lcd.setCursor(0,0);
   lcd.createChar(0, WiFiSymbol);
+  lcd.home();
   lcd.write((uint8_t)0);
   lcd.setCursor(1,0);
   lcd.print("!");
