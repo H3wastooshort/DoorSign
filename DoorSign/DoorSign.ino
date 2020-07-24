@@ -381,7 +381,7 @@ void handleTimeCtrl() {
   
   server.send(200, "text/plain", "OK!"); //Send web page
   Serial.println("Time Set!");
-  handleOpen();
+  updateTime();
   digitalWrite(D4, LOW);
 }
 
@@ -565,12 +565,87 @@ void setup() {
   delay(1000);
   lcd.clear();
   
-  if (inist == 1) {
+  //if (inist == 1) {
+  //  handleOpen();
+  //}
+  //else {
+  //  handleClosed();
+  //}
+  updateTime();
+}
+
+void updateTime() {
+  timeClient.update();
+  if (timeClient.getHours() > oh1 and timeClient.getMinutes() > om1 and timeClient.getDay() == 1) {
+    Serial.println("Opened by Timer");
     handleOpen();
+    digitalWrite(D3, LOW);
   }
-  else {
+  if(timeClient.getHours() > ch1 and timeClient.getMinutes() > cm1 and timeClient.getDay() == 1) {
+    Serial.println("Closed by Timer");
     handleClosed();
+    digitalWrite(D3, HIGH);
+}
+  if (timeClient.getHours() > oh2 and timeClient.getMinutes() > om2 and timeClient.getDay() == 2) {
+    Serial.println("Opened by Timer");
+    handleOpen();
+    digitalWrite(D3, LOW);
   }
+  if(timeClient.getHours() > ch2 and timeClient.getMinutes() > cm2 and timeClient.getDay() == 2) {
+    Serial.println("Closed by Timer");
+    handleClosed();
+    digitalWrite(D3, HIGH);
+}
+  if (timeClient.getHours() > oh3 and timeClient.getMinutes() > om3 and timeClient.getDay() == 3) {
+    Serial.println("Opened by Timer");
+    handleOpen();
+    digitalWrite(D3, LOW);
+  }
+  if(timeClient.getHours() > ch3 and timeClient.getMinutes() > cm3 and timeClient.getDay() == 3) {
+    Serial.println("Closed by Timer");
+    handleClosed();
+    digitalWrite(D3, HIGH);
+}
+  if (timeClient.getHours() > oh4 and timeClient.getMinutes() > om4 and timeClient.getDay() == 4) {
+    Serial.println("Opened by Timer");
+    handleOpen();
+    digitalWrite(D3, LOW);
+  }
+  if(timeClient.getHours() == ch4 and timeClient.getMinutes() == cm4 and timeClient.getDay() == 4) {
+    Serial.println("Closed by Timer");
+    handleClosed();
+    digitalWrite(D3, HIGH);
+}
+  if (timeClient.getHours() > oh5 and timeClient.getMinutes() > om5 and timeClient.getDay() == 5) {
+    Serial.println("Opened by Timer");
+    handleOpen();
+    digitalWrite(D3, LOW);
+  }
+  if(timeClient.getHours() > ch5 and timeClient.getMinutes() > cm5 and timeClient.getDay() == 5) {
+    Serial.println("Closed by Timer");
+    handleClosed();
+    digitalWrite(D3, HIGH);
+}
+  if (timeClient.getHours() > oh6 and timeClient.getMinutes() > om6 and timeClient.getDay() == 6) {
+    Serial.println("Opened by Timer");
+    handleOpen();
+    digitalWrite(D3, LOW);
+  }
+  if(timeClient.getHours() > ch6 and timeClient.getMinutes() > cm6 and timeClient.getDay() == 6) {
+    Serial.println("Closed by Timer");
+    handleClosed();
+    digitalWrite(D3, HIGH);
+}
+  if (timeClient.getHours() > oh7 and timeClient.getMinutes() > om7 and timeClient.getDay() == 7) {
+    Serial.println("Opened by Timer");
+    handleOpen();
+    digitalWrite(D3, LOW);
+  }
+  if(timeClient.getHours() > ch7 and timeClient.getMinutes() > cm7 and timeClient.getDay() == 7) {
+    Serial.println("Closed by Timer");
+    handleClosed();
+    digitalWrite(D3, HIGH);
+}
 }
 
 void checkTime() {
