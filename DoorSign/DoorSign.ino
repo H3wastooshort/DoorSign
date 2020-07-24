@@ -55,6 +55,17 @@ int tz;
 int address = 0;
 
 
+byte WiFiSymbol[] = {
+  B01110,
+  B10001,
+  B00100,
+  B01010,
+  B00000,
+  B00100,
+  B00000,
+  B11111
+};
+
 
 //---------------------------------------------------------------
 //Our HTML webpage contents in program memory
@@ -207,8 +218,8 @@ void handleOpen() {
  lcd.print(":");
  if (cm<10) {lcd.print("0");};
  lcd.print(cm);
- EEPROM.write(address, 1);
- EEPROM.commit();
+ //EEPROM.write(address, 1);
+ //EEPROM.commit();
  digitalWrite(D4, LOW);
 }
 
@@ -284,8 +295,8 @@ void handleClosed() {
  lcd.print(":");
  if (om<10) {lcd.print("0");};
  lcd.print(om);
- EEPROM.write(address, 0);
- EEPROM.commit();
+ //EEPROM.write(address, 0);
+ //EEPROM.commit();
  digitalWrite(D4, LOW);
 }
 
@@ -440,10 +451,12 @@ void setup() {
   lcd.clear();
   
   lcd.print("WiFi...");
+  WiFi.hostname("DoorSign");
   WiFiManager wm;
-  while(!wm.autoConnect()) {
+  while(!wm.autoConnect("DoorSign Config")) {
     ESP.restart();
   }
+  WiFi.hostname("DoorSign");
   
   lcd.clear();
   lcd.print("WiFi... OK");
@@ -729,11 +742,17 @@ void loop() {
   checkTime();
   Serial.println(timeClient.getFormattedTime());
   lcd.setCursor(0,0);
-  while (WiFi.status() != WL_CONNECTED) {
-    digitalWrite(D4, HIGH);
-    delay(250);
-    digitalWrite(D4, LOW);
-    delay(250);
-    Serial.print(".");
-  }
+  if (WiFi.status() != WL_CONNECTED) {
+  lcd.setCursor(0,0);
+  lcd.createChar(0, WiFiSymbol);
+  lcd.write(0);
+  lcd.print("!");
+  digitalWrite(D4, HIGH);
+  delay(250);
+  digitalWrite(D4, LOW);
+  delay(250);
+  Serial.print(".");
+  lcd.setCursor(0,0);
+  lcd.print("   ");
+ }
 }
