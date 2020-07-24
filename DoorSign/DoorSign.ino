@@ -396,6 +396,10 @@ void handleTimeCtrl() {
   digitalWrite(D4, LOW);
 }
 
+void wm_ap_c(WiFiManager *myWiFiManager) {
+  lcd.print(" ERROR");
+}
+
 void setup() {
   pinMode(D3, OUTPUT);
   pinMode(D4, OUTPUT);
@@ -453,6 +457,7 @@ void setup() {
   lcd.print("WiFi...");
   WiFi.hostname("DoorSign");
   WiFiManager wm;
+  wm.setAPCallback(wm_ap_c);
   while(!wm.autoConnect("DoorSign Config")) {
     ESP.restart();
   }
